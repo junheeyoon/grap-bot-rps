@@ -1,0 +1,72 @@
+<html>
+<head>
+</head>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<body>
+  <div id="app"></div>
+  <script>
+    
+    function deleteUser(val) {
+      console.log(val);
+      $.ajax({
+        url: "http://172.16.3.173:3000/user/" + val,
+        method : "DELETE",
+        dataType : "json"
+      }) 
+    }
+    
+    function createUser(name, age, duty) {
+      console.log(typeof age);
+      $.ajax({
+        url: "http://172.16.3.173:3000/user/",
+        method : "POST",
+        dataType : "json",
+        data : {
+          "name" : name,
+          "age" : age,
+          "duty" : duty
+        }       
+      })
+    }
+    $( document ).ready(function(){
+      
+      $.ajax({
+        url: "http://172.16.3.173:3000/user/",
+        method : "GET",
+        dataType : "json"
+      }).done(function(json) {
+        //console.log(json.userlist[2].id);
+        /*
+        var ul = '<ul class="user">'+
+        '<li class="id">id</li>'+
+        '<li class="name">name</li>'+
+        '<li class="age">age</li>'+
+        '<li class="duty">duty</li>'+
+        '</ul>';
+        */
+        //var db = []
+        for(var i = 0; i < json.userlist.length; i++){
+        //$("#app").append($(ul).find(".user").text(json[i].id));
+        var ul = '<ul class="user">'+
+          '<li class="id">'+json.userlist[i].id+'</li>'+
+          '<li class="name">'+json.userlist[i].name+'</li>'+
+          '<li class="age">'+json.userlist[i].age+'</li>'+
+          '<li class="duty">'+json.userlist[i].duty+'</li>'+
+          '<li class="delete">'+'<button onclick="deleteUser('+json.userlist[i].id+')">삭제</button>'+'</li>'+
+          '<li class="create">'+'<button onclick="createUser(\''+json.userlist[i].name+'\','+json.userlist[i].age+',\''+json.userlist[i].duty+'\')">추가</button>'+'</li>'+
+          '</ul>';  
+          $("#app").append(ul);
+        //console.log(json.userlist[i].name,json.userlist[i].age);
+        //db.push(ul);
+        }
+        /*for(var j = 0; j < db.length; j++){
+          console.log($(db[j]).find(".name").text());
+        }*/
+      });
+    });
+  </script>
+</body>
+</html>

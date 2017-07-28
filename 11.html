@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<body>
+  <ul id="user">
+    <li class="id">id</li>
+    <li class="name">name</li>
+    <li class="age">age</li>
+    <li class="duty">duty</li>
+  </ul>
+  <script>
+    $( document ).ready(function(){
+      $.ajax({
+        url: "http://192.168.1.183:3000/user/1",
+        method : "GET",
+        dataType : "jsonp"
+      }).done(function(jsonText) {
+        alert(jsonText);
+      });
+    });
+  </script>
+</body>
+</html>

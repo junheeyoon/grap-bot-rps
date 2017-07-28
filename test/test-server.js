@@ -25,7 +25,7 @@ describe('봇 서버 테스트', function() {
             .catch(done);
     });
 
-    it('GET /user/{id} : 해당 아이디의 유저 정보 보여주기', (done) => {
+    it('GET /user/1 : 해당 아이디의 유저 정보 보여주기', (done) => {
         request.get({
             uri : "http://localhost:3000/user/1",
             json : true
